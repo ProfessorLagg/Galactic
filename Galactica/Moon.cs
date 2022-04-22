@@ -8,6 +8,10 @@ namespace Galactica
 {
     sealed internal class Moon : Planet
     {
-
+        internal Planet Orbiting;
+        internal override double DistanceToOrbiting()
+        {
+            return DistanceTo(Orbiting);
+        }
     }
 }

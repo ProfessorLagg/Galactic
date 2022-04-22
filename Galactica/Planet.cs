@@ -15,6 +15,10 @@ namespace Galactica
     }
     internal class Planet : SpaceObject
     {
+        /// <summary>
+        /// A dictionary of the Moons orbiting this planet using the moons ID as Key
+        /// </summary>
+        internal Dictionary<int, Moon> Orbits { get; private set; }
         internal PlanetType Type;
         private double radius = 1;
         /// <summary>
@@ -84,8 +88,11 @@ namespace Galactica
                 RevolutionTime = TimeSpan.FromDays(value);
             }
         }
-
-        internal double DistanceFromSun()
+        internal void AddOrbit(Moon moon)
+        {
+            this.Orbits.Add(moon.ID, moon);
+        }
+        internal virtual double DistanceToOrbiting()
         {
             return this.Pos.DistanceTo(0,0);
         }
