@@ -25,7 +25,7 @@ namespace Galactica
         /// <summary>
         /// A dictionary of the Planets orbiting this star using the planets ID as Key
         /// </summary>
-        internal Dictionary<int, Planet> Orbits { get; private set; }
+        internal Dictionary<int, Planet> Orbits { get; private set; } = new();
         internal Star(string name, Startype type, double temperature)
         {
             this.Name = name;
@@ -45,6 +45,10 @@ namespace Galactica
         }
         internal void AddOrbit(Planet orbit)
         {
+            if (this.Orbits == null)
+            {
+                this.Orbits = new();
+            }
             orbit.Orbiting = this;
             this.Orbits.Add(orbit.ID,orbit);
         }

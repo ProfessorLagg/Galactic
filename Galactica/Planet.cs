@@ -18,7 +18,7 @@ namespace Galactica
         /// <summary>
         /// A dictionary of the Moons orbiting this planet using the moons ID as Key
         /// </summary>
-        internal Dictionary<int, Moon> Orbits { get; private set; }
+        internal Dictionary<int, Moon> Orbits { get; private set; } = new();
         internal PlanetType Type;
         internal Star Orbiting;
         private double radius = 1;
@@ -97,6 +97,10 @@ namespace Galactica
         }
         internal void AddOrbit(Moon moon)
         {
+            if (this.Orbits == null)
+            {
+                this.Orbits = new();
+            }
             moon.Orbiting = this;
             this.Orbits.Add(moon.ID, moon);
         }
