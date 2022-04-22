@@ -6,6 +6,10 @@ namespace Galactica
     {
         static void Main(string[] args)
         {
+            JupiterOrbit();
+            Console.WriteLine("\n press enter to continue....");
+            Console.ReadKey();
+            Console.Clear();
             SimSolarSystem();
             Console.ReadKey();
         }
@@ -40,7 +44,7 @@ namespace Galactica
                 }
                 Console.WriteLine("\n");
             }
-        
+
 
         }
         internal static Star InitSolarSystem()
@@ -186,6 +190,19 @@ namespace Galactica
             TheSun.AddOrbit(Neptune);
 
             return TheSun;
+        }
+        internal static void JupiterOrbit()
+        {
+            // Vi starter lige ud med at antage at Jupiters bane er en cirkel.
+            // Dette gøres da vi i opgaven IKKE har modtaget nok information til at definere en Elliptisk bane for jupiter (Selv hvis man googler og finder rigtige tal for eccentriciteten)
+            Planet Jupiter = new("Jupiter");
+            Jupiter.Pos = new(35, 52);
+            double degrees = 360 /12 * 2;
+            Console.WriteLine("Jupiter initial position: " + Jupiter.Pos.ToString());
+            Jupiter.Travel(degrees);
+            Console.WriteLine("Jupiter new position: " + Jupiter.Pos.ToString());
+            
+
         }
     }
 }

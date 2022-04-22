@@ -15,6 +15,15 @@ namespace Galactica
     }
     internal class Planet : SpaceObject
     {
+        private Circle path = new();
+        internal Circle OrbitPath
+        {
+            get
+            {
+                path.Radius = this.DistanceToOrigin();
+                return path;
+            }
+        }
         /// <summary>
         /// A dictionary of the Moons orbiting this planet using the moons ID as Key
         /// </summary>
@@ -108,6 +117,15 @@ namespace Galactica
         {
             return this.DistanceTo(Orbiting);
         }
+        internal virtual double DistanceToOrigin()
+        {
+            return this.DistanceTo(0,0);
+        }
+        internal void Travel(double degrees)
+        {
+            (double x, double y) newPos = OrbitPath.Travel(Pos.X, Pos.Y, degrees);
+            this.Pos = new Position(newPos.x, newPos.y);
+        }
         public Planet()
         {
 
@@ -115,6 +133,7 @@ namespace Galactica
         public Planet(string name)
         {
             this.Name = name;
+            
         }
 
 
