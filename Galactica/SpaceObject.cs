@@ -14,11 +14,11 @@ namespace Galactica
             get
             {
                 //return GetID();
-                return this.GetHashCode();
+                return this.Name.GetHashCode();
             }
         }
         private string name;
-        internal string Name
+        public string Name
         {
             get
             {
@@ -26,16 +26,22 @@ namespace Galactica
             }
             set
             {
-                name = value;
+                name = value.ToLower();
             }
         }
         private Position _pos = new(); // STORES POSITION VALUE
 
         internal Position Pos
         {
+            // Der står i opgaven at "Sun" altid er 0,0
+            // Altså IKKE at Star altid er 0,0
             get
             {
-                return _pos;
+                if ((name.ToLower() == "sun"))
+                {
+                    _pos.SetPos(0, 0);
+                }
+                    return _pos;
             }
             set
             {
@@ -88,6 +94,10 @@ namespace Galactica
             {
                 return Math.Sqrt(((X1 - X2) * (X1 - X2)) + ((Y1 - Y2) * (Y1 - Y2)));
             }
+        }
+        internal void SetPos(double x, double y)
+        {
+            this.Pos.SetPos(x, y);
         }
         internal double DistanceTo(SpaceObject ObjectB)
         {

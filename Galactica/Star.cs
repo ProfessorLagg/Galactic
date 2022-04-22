@@ -15,7 +15,11 @@ namespace Galactica
     }
     internal class Star : SpaceObject
     {
+        
         internal Startype Type;
+        /// <summary>
+        /// Temperature in Kelvin
+        /// </summary>
         internal double Temperature;
 
         /// <summary>
@@ -39,9 +43,17 @@ namespace Galactica
                 this.Orbits.Add(P.ID, P);
             }
         }
-        internal void AddOrbit(Planet planet)
+        internal void AddOrbit(Planet orbit)
         {
-            this.Orbits.Add(planet.ID,planet);
+            orbit.Orbiting = this;
+            this.Orbits.Add(orbit.ID,orbit);
+        }
+        internal void AddOrbitRange(IEnumerable<Planet> orbits)
+        {
+            foreach(Planet orbit in orbits)
+            {
+                AddOrbit(orbit);
+            }
         }
     }
 }

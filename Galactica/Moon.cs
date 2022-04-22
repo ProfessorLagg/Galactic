@@ -13,5 +13,9 @@ namespace Galactica
         {
             return DistanceTo(Orbiting);
         }
+        public Moon(string name)
+        {
+            Name = name;
+        }
     }
 }

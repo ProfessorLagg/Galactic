@@ -20,6 +20,7 @@ namespace Galactica
         /// </summary>
         internal Dictionary<int, Moon> Orbits { get; private set; }
         internal PlanetType Type;
+        internal Star Orbiting;
         private double radius = 1;
         /// <summary>
         /// Radius in meters
@@ -65,6 +66,9 @@ namespace Galactica
         }
 
         internal TimeSpan RotationTime;
+        /// <summary>
+        /// Rotation period in hours
+        /// </summary>
         internal double RotationPeriod
         {
             get
@@ -77,6 +81,9 @@ namespace Galactica
             }
         }
         internal TimeSpan RevolutionTime;
+        /// <summary>
+        /// Orbital Period in Days
+        /// </summary>
         internal double RevolutionPeriod
         {
             get
@@ -90,13 +97,21 @@ namespace Galactica
         }
         internal void AddOrbit(Moon moon)
         {
+            moon.Orbiting = this;
             this.Orbits.Add(moon.ID, moon);
         }
         internal virtual double DistanceToOrbiting()
         {
-            return this.Pos.DistanceTo(0,0);
+            return this.DistanceTo(Orbiting);
         }
+        public Planet()
+        {
 
+        }
+        public Planet(string name)
+        {
+            this.Name = name;
+        }
 
 
     }
